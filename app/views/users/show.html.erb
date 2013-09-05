@@ -15,5 +15,15 @@
   <%= @user.email %>
 </p>
 
+  <div class="itemlist">
+    <% if @user.items.any? %>
+      <h3>Items (<%= @user.items.count %>)</h3>
+      <ol class="items">
+        <%= render @items %>
+      </ol>
+      <%= will_paginate @items %>
+    <% end %>
+  </div>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

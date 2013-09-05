@@ -3,8 +3,6 @@
 Playing with rails to make a wishlist app.
 Working through the docs on railstutorial.org
 
-Things you may want to cover:
-
 More docs to come such as...
 
 * Ruby version
