@@ -1,4 +1,6 @@
 Shineget::Application.routes.draw do
+  resources :lists
+
   resources :items
 
   resources :users

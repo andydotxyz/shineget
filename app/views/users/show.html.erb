@@ -16,12 +16,26 @@
 </p>
 
   <div class="itemlist">
-    <% if @user.items.any? %>
-      <h3>Items (<%= @user.items.count %>)</h3>
-      <ol class="items">
-        <%= render @items %>
+    <% if @user.lists.any? %>
+        <h3>Lists</h3>
+        <ol class="lists">
+        <% @user.lists.each do |list| %>
+              <li>
+                <span class="name"><%= list.name %></span>
+                <span class="url">(<%= list.url %>)</span>
+
+                <% if list.items.any? %>
+                    <% items = list.items.paginate(page: params[:page]) %>
+                    <h3>Items (<%= items.count %>)</h3>
+                    <ol class="items">
+                      <%= render items %>
+                    </ol>
+                    <%= will_paginate items %>
+                <% end %>
+
+              </li>
+        <% end %>
       </ol>
-      <%= will_paginate @items %>
     <% end %>
   </div>
 
