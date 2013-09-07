@@ -31,6 +31,8 @@ GEM
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
       will_paginate
+    bootswatch-rails (0.5.0)
+      railties (>= 3.1)
     builder (3.1.4)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -115,6 +117,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
+  bootswatch-rails
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails

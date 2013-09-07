@@ -1,0 +1,26 @@
+// First import bootswatch journal variables
+@import "bootswatch/cerulean/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+
+// Bootstrap body padding for fixed navbar
+body {
+  padding-top: 60px;
+}
+
+/* Remove top padding when top navbar goes static in narrow viewports */
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+// Responsive styles go here in case you want them
+@import "bootstrap-responsive";
+
+// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";
+
+// Whatever application styles you have go last
+@import "custom";
