@@ -6,7 +6,7 @@
       <th>Url</th>
       <th>Notes</th>
       <th>Price</th>
-      <th>User</th>
+      <th>List</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,7 +19,7 @@
         <td><%= item.url %></td>
         <td><%= item.notes %></td>
         <td><%= item.price %></td>
-        <td><%= item.user_id %></td>
+        <td><%= item.list_id %></td>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
