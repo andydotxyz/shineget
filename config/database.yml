@@ -21,5 +21,8 @@ test:
 production:
   adapter: postgresql
   host: localhost
-  username: user
-  database: app-prod
+  encoding: unicode
+  database: ndoda_production
+  pool: 5
+  username:
+  password:
