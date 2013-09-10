@@ -16,25 +16,26 @@
 
   <div class="itemlist">
     <% if @user.lists.any? %>
-        <h3>Lists</h3>
-        <ol class="lists">
         <% @user.lists.each do |list| %>
-              <li>
-                <span class="name"><%= list.name %></span>
-                <span class="url">(<%= list.url %>)</span>
+
+              <h3 class="name"><%= list.name %> (<%= list.items.count %> items)
+                <% if list.url.blank? && current_user && current_user == @user %>
+                  &nbsp;<a href="/items/new?list=<%= list.id %>" class="btn btn-small btn-primary">Add Item</a>
+                <% end %>
+              </h3>
+                <% if (!list.url.blank?) %>
+                <span class="url"> - <%= list.url %></span>
+                <% end %>
 
                 <% if list.items.any? %>
                     <% items = list.items.paginate(page: params[:page]) %>
-                    <h3>Items (<%= items.count %>)</h3>
                     <ol class="items">
                       <%= render items %>
                     </ol>
                     <%= will_paginate items %>
                 <% end %>
 
-              </li>
         <% end %>
-      </ol>
     <% end %>
   </div>
 

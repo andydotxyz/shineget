@@ -15,6 +15,9 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    if List.exists?(params[:list])
+      @item.list = List.find(params[:list])
+    end
   end
 
   # GET /items/1/edit

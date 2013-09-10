@@ -11,11 +11,15 @@
     <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
+  <% if !@item.list %>
   <div class="field">
     <%= f.label :list_id %><br>
     <%= f.number_field :list_id %>
   </div>
+  <% else %>
+    <%= f.hidden_field :list_id, value: @item.list.id %>
+  <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Add Item', :class => 'btn btn-primary' %>
   </div>
 <% end %>
