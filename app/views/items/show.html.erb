@@ -1,6 +1,10 @@
+<% if !@item.imgurl.blank? %>
+    <img style="width:100px; float:right;" src="<%= @item.imgurl %>" />
+<% end %>
+
 <p>
-  <strong>Url:</strong>
-  <%= @item.url %>
+  <strong>Title:</strong>
+  <a href="<%= @item.url %>"><%= @item.title %></a>
 </p>
 
 <p>

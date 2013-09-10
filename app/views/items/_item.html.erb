@@ -1,5 +1,8 @@
 <li>
-  <span class="url"><a href="<%= item.url %>" target="_blank"><%= item.url %></a></span>
+  <% if !item.imgurl.blank? %>
+    <img style="width:100px; float:left;" src="<%= item.imgurl %>" />
+  <% end %>
+  <span class="url"><a href="<%= item.url %>" target="_blank"><%= item.title %></a></span>
   <span class="price">(£<%= item.price %>)</span>
   <br />
   <span class="notes"><%= item.notes %></span>
