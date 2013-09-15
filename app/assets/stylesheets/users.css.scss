@@ -1,3 +1,31 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-details img.gravatar {
+  width: 120px;
+  height: 120px;
+  float: left;
+  padding-bottom: 20px;
+  padding-right: 10px;
+}
+
+.user-details h1, .user-details p {
+  text-align: left;
+}
+
+.user-details h1 {
+  margin-bottom: 0.5em;
+}
+
+.user-details p {
+  margin: 0;
+}
+
+.user-details .tools {
+  float: right;
+}
+
+.itemlist {
+  clear: both;
+}

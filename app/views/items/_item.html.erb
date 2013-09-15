@@ -1,9 +1,24 @@
-<li style="clear:both">
-  <% if !item.imgurl.blank? %>
-    <img style="width:100px; float:left;" src="<%= item.imgurl %>" />
+<li class="item-row <%= cycle('odd', 'even') -%>">
+  <% if item.imgurl.present? %>
+      <div class="thumbnail" style="background-image: url('<%= item.imgurl %>');"></div>
   <% end %>
-  <span class="url"><a href="<%= item.url %>" target="_blank"><%= item.title %></a></span>
-  <span class="price">(£<%= item.price %>)</span>
-  <br />
+
+  <span class="buygroup">
+    <a href="<%= item.url %>" class="buy btn btn-small btn-primary" target="_blank">Buy</a>
+    <% if item.price > 0.0 %>
+    <span class="price">£<%= item.price %></span>
+    <% end %>
+  </span>
+
+  <% if signed_in? %>
+  <span class="actions">
+    <%= link_to 'Edit', edit_item_path(item) %> |
+    <%= link_to 'Remove', item, method: 'delete' %>
+  </span>
+  <% end %>
+
+  <span class="url"><%= item.title %></span>
+
   <span class="notes"><%= item.notes %></span>
+
 </li>
