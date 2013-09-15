@@ -59,7 +59,10 @@ Shineget::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += Dir::entries("app/assets/javascripts").
+      map{|f| f[/^(?!application\.).*\.js/]}.compact
+  config.assets.precompile += Dir::entries("app/assets/stylesheets").
+      map{|f| f[/^(?!(application|custom)\.).*\.scss/]}.compact
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

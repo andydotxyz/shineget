@@ -21,10 +21,5 @@ module Shineget
     # config.i18n.default_locale = :de
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-
-    config.assets.precompile += Dir::entries("app/assets/javascripts").
-        map{|f| f[/^(?!application\.).*\.js/]}.compact
-    config.assets.precompile += Dir::entries("app/assets/stylesheets").
-        map{|f| f[/^(?!(application|custom)\.).*\.scss/]}.compact
   end
 end
