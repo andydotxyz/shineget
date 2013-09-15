@@ -62,7 +62,7 @@ Shineget::Application.configure do
   config.assets.precompile += Dir::entries("app/assets/javascripts").
       map{|f| f[/^(?!application\.).*\.js/]}.compact
   config.assets.precompile += Dir::entries("app/assets/stylesheets").
-      map{|f| f[/^(?!(application|custom)\.).*\.scss/]}.compact
+      map{|f| f[/^(?!(application|custom)\.).*\.css/]}.compact
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
