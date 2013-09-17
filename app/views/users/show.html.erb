@@ -30,6 +30,14 @@
         <h3 class="name">
           <%= list.name %> (<%= list.items.count %> items)
 
+          <% if list.url.blank? && current_user && current_user == @user %>
+            <form action="/lists/<%= list.id %>/items/newfromurl">
+              <span class="input-append" style="float:right; width: 100%; text-align: center">
+                <input class="span2" id="appendedInputButton" type="text" name="url" style="width: 80%"/>
+                <input type="submit" class="btn btn-primary" type="button" value="Add Item" />
+              </span>
+            </form>
+          <% end %>
         </h3>
         <div style="clear:both"></div>
           <% if list.url.present? %>

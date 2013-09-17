@@ -1,4 +1,4 @@
-<%= form_for(@item) do |f| %>
+<%= form_for([@list, @item]) do |f| %>
   <div class="field">
     <%= f.label :url %><br>
     <%= f.text_field :url %>

@@ -12,12 +12,40 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # GET /items/new
+  # GET /list/:list_id/items/new
   def new
+    @list = List.find(params[:list_id])
     @item = Item.new
-    if List.exists?(params[:list])
-      @item.list = List.find(params[:list])
+    @item.list = @list
+
+    if params[:url].present?
+      @item.url = params[:url]
     end
+
+    if params[:title].present?
+      @item.title = params[:title]
+    end
+
+    if params[:notes].present?
+      @item.notes = params[:notes]
+    end
+
+    if params[:imgurl].present?
+      @item.imgurl = params[:imgurl]
+    end
+
+    if params[:price].present?
+      @item.price = params[:price]
+    end
+  end
+
+  # GET /list/:list_id/items/newfromurl?url=something
+  def new_from_url
+    logger.error params['url']
+    @list = List.find(params[:list_id])
+
+    redirect_to new_list_item_path :list_id => @list.id, :url => tmp_item.url, :title => tmp_item.title,
+                                   :imgurl => tmp_item.imgurl, :price => tmp_item.price, :notes => tmp_item.notes
   end
 
   # GET /items/1/edit

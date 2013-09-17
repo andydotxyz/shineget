@@ -1,10 +1,28 @@
 <div class="center hero-unit">
   <h1>Welcome to <img src="/images/coin-small.png" style="margin-top:-8px;"/> Shine Get</h1>
 
+  <% if signed_in? %>
+  <h2>
+    Add a new item to your wishlist by entering the URL below.
+  </h2>
+
+  <% @current_user.lists.each do |list| %>
+    <% if list.url.blank? %>
+       <% @list_id = list.id %>
+    <% end %>
+  <% end %>
+  <form action="/lists/<%= @list_id %>/items/newfromurl">
+    <div class="input-append quick-form">
+      <input class="span2" id="appendedInputButton" type="text" name="url" />
+      <input type="submit" class="btn btn-primary" type="button" value="Add Item" />
+    </div>
+  </form>
+  <% else %>
   <h2>
     This is the home page for my shine get app.
   </h2>
 
   <%= link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary" %>
+  <% end %>
 </div>
 
