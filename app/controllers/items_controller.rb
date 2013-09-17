@@ -44,6 +44,8 @@ class ItemsController < ApplicationController
     logger.error params['url']
     @list = List.find(params[:list_id])
 
+    tmp_item = ItemParser.parse(params['url'])
+
     redirect_to new_list_item_path :list_id => @list.id, :url => tmp_item.url, :title => tmp_item.title,
                                    :imgurl => tmp_item.imgurl, :price => tmp_item.price, :notes => tmp_item.notes
   end
