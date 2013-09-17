@@ -4,10 +4,10 @@ one:
   url: MyString
   notes: MyText
   price: 9.99
-  user_id: 1
+  list_id: 1
 
 two:
   url: MyString
   notes: MyText
   price: 9.99
-  user_id: 1
+  list_id: 1
