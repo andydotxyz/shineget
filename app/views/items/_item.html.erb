@@ -5,7 +5,7 @@
 
   <span class="buygroup">
     <a href="<%= item.url %>" class="buy btn btn-small btn-primary" target="_blank">Buy</a>
-    <% if item.price > 0.0 %>
+    <% if item.price && item.price > 0.0 %>
     <span class="price">£<%= item.price %></span>
     <% end %>
   </span>

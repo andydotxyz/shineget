@@ -25,27 +25,25 @@
 
   <div class="itemlist">
     <% if @user.lists.any? %>
-        <% @user.lists.each do |list| %>
+      <% @user.lists.each do |list| %>
 
-              <h3 class="name"><%= list.name %> (<%= list.items.count %> items)
-                <% if list.url.blank? && current_user && current_user == @user %>
-                  &nbsp;<a href="/items/new?list=<%= list.id %>" class="btn btn-small btn-primary">Add Item</a>
-                <% end %>
-              </h3>
-                <% if list.url.present? %>
-                <span class="url"> - <%= list.url %></span>
-                <% end %>
+        <h3 class="name">
+          <%= list.name %> (<%= list.items.count %> items)
 
-                <% if list.items.any? %>
-                    <% items = list.items.paginate(page: params[:page]) %>
-                    <ul class="items">
-                      <%= render items %>
-                    </ul>
-                    <div class="after-items"></div>
-                    <%= will_paginate items %>
-                <% end %>
-
+        </h3>
+        <div style="clear:both"></div>
+          <% if list.url.present? %>
+          <span class="url"> - <%= list.url %></span>
         <% end %>
+
+        <% if list.items.any? %>
+          <ul class="items">
+            <%= render list.items %>
+          </ul>
+          <div class="after-items"></div>
+        <% end %>
+
+      <% end %>
     <% end %>
   </div>
 
