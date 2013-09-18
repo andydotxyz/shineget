@@ -32,31 +32,39 @@ class ItemParser
     def self.image_of_item(doc)
       images = doc.xpath('//img').select{|image| is_item_image image}
       if images
-        return images[0]['src']
+        return sanitise_url images[0]['src']
       end
       return nil
     end
 
     def self.is_item_image(image)
-      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|pixel/i).present?
+      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|pixel|logo/i).present?
         return false
       end
       if image.attribute('id').to_s.scan(/logo/).present?
         return false
       end
 
-      if image.attribute('style').to_s.scan(/display:none/).present?
+      if image.attribute('style').to_s.include? 'display:none'
         return image.parent.attribute('id').to_s == 'rwImages_hidden'
       end
 
       return true
     end
 
+    def self.sanitise_url(url)
+      if url[0..1] == '//'
+        return 'http:' + url
+      end
+
+      return url;
+    end
+
     def self.price_of_item(doc)
       # look for prices in things marked as class="text"
       doc.css('.price').each do |node|
-        if node.parent.parent.attribute('id').to_s == 'secondaryUsedAndNew'
-          break
+        if node.parent.parent.attribute('id').to_s == 'secondaryUsedAndNew' or node.parent.attribute('class').to_s.scan(/delivery-|SavePrice/i).present?
+          next
         end
 
         price = price_in_text node.text

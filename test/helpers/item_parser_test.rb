@@ -40,4 +40,12 @@ class ItemParserTest < ActionView::TestCase
     assert_equal 'http://ecx.images-amazon.com/images/I/51B1clwfANL._SY300_.jpg', item.imgurl
     assert_equal 126.99, item.price
   end
+
+  test 'parsing real appletv html gets correct data' do
+    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/appletv.html')
+
+    assert_equal 'New Apple TV with 1080p Full HD', item.title
+    assert_equal 'http://johnlewis.scene7.com/is/image/JohnLewis/231055719?$prod_main$', item.imgurl
+    assert_equal 99.0, item.price
+  end
 end
