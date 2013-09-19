@@ -56,4 +56,13 @@ class ItemParserTest < ActionView::TestCase
     assert_equal 'http://johnlewis.scene7.com/is/image/JohnLewis/231055719?$prod_main$', item.imgurl
     assert_equal 99.0, item.price
   end
+
+  test 'parsing real despicable html gets correct data' do
+    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/despicable.html')
+
+    assert_equal 'Despicable Me 2 [DVD + UV Copy] [2013]', item.title
+    assert_equal 'http://ecx.images-amazon.com/images/I/51AqXLIsGSL._SY300_.jpg', item.imgurl
+    assert_equal 10.0, item.price
+  end
+
 end

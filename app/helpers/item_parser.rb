@@ -66,19 +66,19 @@ class ItemParser
         return price_in_text attr.value if attr.value
       end
 
-      # then look for prices in things marked as class="text"
-      doc.css('.price').each do |node|
-        if node.parent.parent.attribute('id').to_s == 'secondaryUsedAndNew' or node.parent.attribute('class').to_s.scan(/delivery-|SavePrice/i).present?
-          next
-        end
-
+      # then look for prices in things marked as prices in the class
+      doc.css('.priceLarge').each do |node|
         price = price_in_text node.text
         if price > 0.0
           return price
         end
       end
 
-      doc.css('.priceLarge').each do |node|
+      doc.css('.price').each do |node|
+        if node.parent.parent.attribute('id').to_s == 'secondaryUsedAndNew' or node.parent.attribute('class').to_s.scan(/delivery-|SavePrice/i).present?
+          next
+        end
+
         price = price_in_text node.text
         if price > 0.0
           return price
