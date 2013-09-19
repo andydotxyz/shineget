@@ -33,6 +33,14 @@ class ItemParserTest < ActionView::TestCase
     assert_equal 69.95, item.price
   end
 
+  test 'parsing real screwdriver-us html gets correct data' do
+    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/screwdriver-us.html')
+
+    assert_equal 'Tenth Doctor\'s Sonic Screwdriver Universal Remote Control', item.title
+    assert_equal 'http://media.firebox.com/pic/p6153_column_grid_6.jpg', item.imgurl
+    assert_equal 69.95, item.price
+  end
+
   test 'parsing real technic html gets correct data' do
     item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/technic.html')
 

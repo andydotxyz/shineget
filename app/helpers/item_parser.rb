@@ -61,7 +61,12 @@ class ItemParser
     end
 
     def self.price_of_item(doc)
-      # look for prices in things marked as class="text"
+      # look in headers
+      doc.xpath("//meta[@property='og:price:amount']/@content").each do |attr|
+        return price_in_text attr.value if attr.value
+      end
+
+      # then look for prices in things marked as class="text"
       doc.css('.price').each do |node|
         if node.parent.parent.attribute('id').to_s == 'secondaryUsedAndNew' or node.parent.attribute('class').to_s.scan(/delivery-|SavePrice/i).present?
           next
