@@ -1,6 +1,7 @@
 Shineget::Application.routes.draw do
   resources :lists do
-    match "items/newfromurl", :controller => 'items', :action => 'new_from_url', via: 'get'
+    match "items/findfromurl", :controller => 'items', :action => 'find_from_url', via: 'get'
+    match "items/addfromurl", :controller => 'items', :action => 'add_from_url', via: 'post'
     resources :items, shallow: true
   end
   resources :users

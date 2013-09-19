@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
@@ -39,15 +41,27 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /list/:list_id/items/newfromurl?url=something
-  def new_from_url
-    logger.error params['url']
+  # GET /list/:list_id/items/findfromurl?url=something
+  def find_from_url
     @list = List.find(params[:list_id])
 
-    tmp_item = ItemParser.parse(params['url'])
+    @item = ItemParser.parse(params['url'])
+    @item.id = -1
 
-    redirect_to new_list_item_path :list_id => @list.id, :url => tmp_item.url, :title => tmp_item.title,
-                                   :imgurl => tmp_item.imgurl, :price => tmp_item.price, :notes => tmp_item.notes
+    @add_url = '/lists/' + @list.id.to_s + '/items/addfromurl?url=' + CGI::escape(params['url'])
+    @edit_url = new_list_item_path + '?list_id=' + @list.id.to_s + '&url=' + @item.url + '&title=' + @item.title.to_s +
+    '&imgurl=' + @item.imgurl.to_s + '&price=' + @item.price.to_s + '&notes=' + @item.notes.to_s
+  end
+
+  # POST /list/:list_id/items/addfromurl?url=something
+  def add_from_url
+    @list = List.find(params[:list_id])
+
+    @item = ItemParser.parse(params['url'])
+    @item.list = @list
+    @item.save
+
+    redirect_to current_user
   end
 
   # GET /items/1/edit

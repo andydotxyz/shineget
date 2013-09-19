@@ -5,7 +5,7 @@ require 'open-uri'
 class ItemParser
   def self.parse(url)
 
-    @item = Item.create
+    @item = Item.new
     @item.url = url
 
     if url[0..3] == 'file'

@@ -1,0 +1,28 @@
+<h1>New item found...</h1>
+
+<div class="item-row after-items item-preview">
+  <% if @item.imgurl.present? %>
+      <div class="thumbnail" style="background-image: url('<%= @item.imgurl %>');"></div>
+  <% end %>
+
+  <span class="buygroup">
+    <% if @item.price && @item.price > 0.0 %>
+    <span class="price">£<%= @item.price %></span>
+    <% end %>
+  </span>
+
+  <span class="url"><%= @item.title %></span>
+
+  <span class="notes"><%= @item.notes %></span>
+
+</div>
+
+<div class="preview-options">
+  <%= form_tag @add_url, :name => "addItemForm" do %>
+    <input type="submit" class="btn btn-primary" value="Add Item" />
+    &nbsp;
+    <a href="<%= @edit_url %>" class="btn btn-warning">Edit</a>
+  <% end %>
+</div>
+
+<div style="clear:both"></div>

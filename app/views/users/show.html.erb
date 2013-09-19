@@ -31,7 +31,7 @@
           <%= list.name %> (<%= list.items.count %> items)
 
           <% if list.url.blank? && current_user && current_user == @user %>
-            <form action="/lists/<%= list.id %>/items/newfromurl">
+            <form action="/lists/<%= list.id %>/items/findfromurl">
               <span class="input-append" style="float:right; width: 100%; text-align: center">
                 <input class="span2" id="appendedInputButton" type="text" name="url" style="width: 80%"/>
                 <input type="submit" class="btn btn-primary" type="button" value="Add Item" />
