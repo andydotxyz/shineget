@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :admin_user,     only: [:index]
 
   # GET /users
   # GET /users.json
@@ -86,5 +87,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to root_url, notice: "Permission denied" unless self.current_user?(@user)
+    end
+
+    def admin_user
+      redirect_to root_url, notice: "Permission denied" unless self.admin?self.current_user
     end
 end

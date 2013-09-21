@@ -28,4 +28,8 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  def admin?(user)
+    user && user.username == 'ajwillia.ms'
+  end
 end
