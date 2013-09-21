@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
 
   after_create :add_default_list
 
+  def to_param
+    username
+  end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
