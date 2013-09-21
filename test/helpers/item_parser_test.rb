@@ -1,68 +1,69 @@
 require 'test_helper'
 
 class ItemParserTest < ActionView::TestCase
-  test 'parsing provided html gets basic data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/test.html')
 
-    assert_equal 'Test Title', item.title
-    assert_equal 'http://example.com/test.png', item.imgurl
-    assert_equal 20.00, item.price
+  def run_data_tests(file, data)
+    item = ItemParser.parse(File.dirname(__FILE__) + '/' + file + '.html')
+
+    assert_equal item.title, data[:title]
+    assert_equal item.imgurl, data[:imgurl]
+    assert_equal item.price, data[:price]
+  end
+
+  test 'parsing provided html gets basic data' do
+    run_data_tests( 'test',
+                    :title => 'Test Title',
+                    :imgurl => 'http://example.com/test.png',
+                    :price => 20.00 )
   end
 
   test 'parsing provided html gets contextual data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/test2.html')
-
-    assert_equal 'Overridden Title', item.title
-    assert_equal 'http://example.com/test.png', item.imgurl
-    assert_equal 24.99, item.price
+    run_data_tests( 'test2',
+                    :title=> 'Overridden Title',
+                    :imgurl => 'http://example.com/test.png',
+                    :price => 24.99 )
   end
 
   test 'parsing real tshirt html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/tshirt.html')
-
-    assert_equal 'Men\'s Zelda Nintendo With Link T-Shirt (Black)', item.title
-    assert_equal 'http://p.playserver1.com/ProductImages/0/3/5/9/5/2/9/3/39259530_300x300_1.jpg', item.imgurl
-    assert_equal 16.99, item.price
+    run_data_tests( 'tshirt',
+                    :title => 'Men\'s Zelda Nintendo With Link T-Shirt (Black)',
+                    :imgurl => 'http://p.playserver1.com/ProductImages/0/3/5/9/5/2/9/3/39259530_300x300_1.jpg',
+                    :price => 16.99 )
   end
 
   test 'parsing real screwdriver html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/screwdriver.html')
-
-    assert_equal 'Tenth Doctor\'s Sonic Screwdriver Universal Remote Control', item.title
-    assert_equal 'http://media.firebox.com/pic/p6153_column_grid_6.jpg', item.imgurl
-    assert_equal 69.95, item.price
+    run_data_tests( 'screwdriver',
+                    :title => 'Tenth Doctor\'s Sonic Screwdriver Universal Remote Control',
+                    :imgurl => 'http://media.firebox.com/pic/p6153_column_grid_6.jpg',
+                    :price => 69.95 )
   end
 
   test 'parsing real screwdriver-us html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/screwdriver-us.html')
-
-    assert_equal 'Tenth Doctor\'s Sonic Screwdriver Universal Remote Control', item.title
-    assert_equal 'http://media.firebox.com/pic/p6153_column_grid_6.jpg', item.imgurl
-    assert_equal 69.95, item.price
+    run_data_tests( 'screwdriver-us',
+                    :title => 'Tenth Doctor\'s Sonic Screwdriver Universal Remote Control',
+                    :imgurl => 'http://media.firebox.com/pic/p6153_column_grid_6.jpg',
+                    :price => 69.95 )
   end
 
   test 'parsing real technic html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/technic.html')
-
-    assert_equal 'LEGO Technic 8110 Mercedes-Benz Unimog U 400', item.title
-    assert_equal 'http://ecx.images-amazon.com/images/I/51B1clwfANL._SY300_.jpg', item.imgurl
-    assert_equal 126.99, item.price
+    run_data_tests( 'technic',
+                    :title => 'LEGO Technic 8110 Mercedes-Benz Unimog U 400',
+                    :imgurl => 'http://ecx.images-amazon.com/images/I/51B1clwfANL._SY300_.jpg',
+                    :price => 126.99 )
   end
 
   test 'parsing real appletv html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/appletv.html')
-
-    assert_equal 'New Apple TV with 1080p Full HD', item.title
-    assert_equal 'http://johnlewis.scene7.com/is/image/JohnLewis/231055719?$prod_main$', item.imgurl
-    assert_equal 99.0, item.price
+    run_data_tests( 'appletv',
+                    :title => 'New Apple TV with 1080p Full HD',
+                    :imgurl => 'http://johnlewis.scene7.com/is/image/JohnLewis/231055719?$prod_main$',
+                    :price => 99.0 )
   end
 
   test 'parsing real despicable html gets correct data' do
-    item = ItemParser.parse('file://' + File.dirname(__FILE__) + '/despicable.html')
-
-    assert_equal 'Despicable Me 2 [DVD + UV Copy] [2013]', item.title
-    assert_equal 'http://ecx.images-amazon.com/images/I/51AqXLIsGSL._SY300_.jpg', item.imgurl
-    assert_equal 10.0, item.price
+    run_data_tests( 'despicable',
+                    :title => 'Despicable Me 2 [DVD + UV Copy] [2013]',
+                    :imgurl => 'http://ecx.images-amazon.com/images/I/51AqXLIsGSL._SY300_.jpg',
+                    :price => 10.0 )
   end
 
 end

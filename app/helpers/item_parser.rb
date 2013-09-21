@@ -3,16 +3,12 @@ require 'nokogiri'
 require 'open-uri'
 
 class ItemParser
-  def self.parse(url)
+  def self.parse(url_or_file)
 
     @item = Item.new
-    @item.url = url
+    @item.url = url_or_file
 
-    if url[0..3] == 'file'
-      url = url[7..-1]
-    end
-
-    doc = Nokogiri::HTML(open(url))
+    doc = Nokogiri::HTML(open(url_or_file))
 
     @item.title = title_of_item doc
     @item.imgurl = image_of_item doc
