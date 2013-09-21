@@ -4,7 +4,7 @@ Shineget::Application.routes.draw do
     match "items/addfromurl", :controller => 'items', :action => 'add_from_url', via: 'post'
     resources :items, shallow: true
   end
-  resources :users
+  resources :users, :id => /[A-Za-z0-9\.]+?/, :format => /json|html/
 
   resources :sessions, only: [:new, :create, :destroy]
 
