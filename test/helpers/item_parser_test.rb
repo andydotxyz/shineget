@@ -66,4 +66,17 @@ class ItemParserTest < ActionView::TestCase
                     :price => 10.0 )
   end
 
+  test 'parsing real starwars html gets correct data' do
+    run_data_tests( 'starwars',
+                    :title => 'Star Wars Origami',
+                    :imgurl => 'http://media.firebox.com/pic/p5546_column_grid_6.jpg',
+                    :price => 12.99 )
+  end
+
+  test 'parsing real knex html gets correct data' do
+    run_data_tests( 'knex',
+                    :title => 'K\'Nex Mario Vs Goombas Building Set',
+                    :imgurl => 'http://static.toysrus.co.uk//medias/sys_master/h29/hb4/8810489217054.jpg',
+                    :price => 34.99 )
+  end
 end

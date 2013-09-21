@@ -34,15 +34,27 @@ class ItemParser
     end
 
     def self.is_item_image(image)
-      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|pixel|logo/i).present?
+      if image.attribute('id').to_s.scan(/productImage/i).present?
+        return true
+      end
+      if image.attribute('id').to_s.scan(/logo|zoom/i).present?
         return false
       end
-      if image.attribute('id').to_s.scan(/logo/).present?
+      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|pixel|logo|adserver/i).present?
+        return false
+      end
+      if image.attribute('alt').to_s.scan(/deals/i).present?
         return false
       end
 
       if image.attribute('style').to_s.include? 'display:none'
         return image.parent.attribute('id').to_s == 'rwImages_hidden'
+      end
+
+      if image.parent.parent.parent.attribute('class').to_s.include?'brand' or
+          image.parent.parent.parent.attribute('class').to_s.include?'thumbnail' or
+          image.parent.parent.attribute('class').to_s.include?'brand'
+        return false
       end
 
       return true
