@@ -2,6 +2,7 @@ require 'open-uri'
 
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /items
   # GET /items.json
@@ -117,5 +118,9 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:url, :title, :notes, :imgurl, :price, :list_id)
+    end
+
+    def correct_user
+      redirect_to root_url, notice: "Permission denied" unless self.current_user?(@item.list.user)
     end
 end

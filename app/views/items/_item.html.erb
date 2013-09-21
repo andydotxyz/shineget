@@ -10,7 +10,7 @@
     <% end %>
   </span>
 
-  <% if signed_in? %>
+  <% if current_user?item.list.user %>
   <span class="actions">
     <%= link_to 'Edit', edit_item_path(item) %> |
     <%= link_to 'Remove', item, method: 'delete' %>

@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /lists
   # GET /lists.json
@@ -71,5 +72,9 @@ class ListsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
       params.require(:list).permit(:url, :name, :updated, :user_id)
+    end
+
+    def correct_user
+      redirect_to root_url, notice: "Permission denied" unless self.current_user?(@list.user)
     end
 end
