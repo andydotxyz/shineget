@@ -19,6 +19,35 @@ class ListsController < ApplicationController
     @list = List.new
   end
 
+  # GET /lists/findfromurl?url=something
+  def find_from_url
+    @list = ListParser.parse(params['url'])
+
+    @add_url = '/lists/addfromurl?url=' + CGI::escape(params['url'])
+  end
+
+  # POST /lists/addfromurl?url=something
+  def add_from_url
+    @list = ListParser.parse(params['url'])
+    @list.user = current_user
+
+    items_cache = []
+    @list.items.each { |item| items_cache << item; puts 'cached => ' + item.title }
+    @list.items.clear
+    @list.save!
+
+    items_cache.each { |item|
+      puts 'adding => ' + item.title
+      item.list = @list
+      @list.items << item
+
+      item.save!
+    }
+    @list.save!
+
+    redirect_to current_user
+  end
+
   # GET /lists/1/edit
   def edit
   end

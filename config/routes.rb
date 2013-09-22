@@ -1,9 +1,13 @@
 Shineget::Application.routes.draw do
+  match "/lists/findfromurl", :controller => 'lists', :action => 'find_from_url', via: 'get'
+  match "/lists/addfromurl", :controller => 'lists', :action => 'add_from_url', via: 'post'
+
   resources :lists do
     match "items/findfromurl", :controller => 'items', :action => 'find_from_url', via: 'get'
     match "items/addfromurl", :controller => 'items', :action => 'add_from_url', via: 'post'
     resources :items, shallow: true
   end
+
   resources :users, :id => /[A-Za-z0-9\.]+?/, :format => /json|html/
 
   resources :sessions, only: [:new, :create, :destroy]

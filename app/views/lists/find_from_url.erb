@@ -1,0 +1,36 @@
+<h1>New list found...</h1>
+
+<h3><%= @list.name %></h3>
+<p><%= @list.url %></p>
+
+<% if @list.items.any? %>
+  <% @list.items.each do |item| %>
+
+    <div class="item-row">
+      <% if item.imgurl.present? %>
+          <div class="thumbnail" style="background-image: url('<%= item.imgurl %>');"></div>
+      <% end %>
+
+      <span class="buygroup">
+        <% if item.price && item.price > 0.0 %>
+        <span class="price">£<%= item.price %></span>
+        <% end %>
+      </span>
+
+      <span class="url"><%= item.title %></span>
+
+      <span class="notes"><%= item.notes %></span>
+
+    </div>
+  <% end %>
+  <div class="after-items"></div>
+<% end %>
+
+<div style="clear:both"></div>
+
+<div class="preview-options">
+  <%= form_tag @add_url, :name => "addItemForm" do %>
+    <input type="submit" class="btn btn-primary" value="Add List" />
+  <% end %>
+</div>
+
