@@ -13,8 +13,19 @@ class ItemParser
     @item.title = title_of_item doc
     @item.imgurl = image_of_item doc
     @item.price = price_of_item doc
+    @item.currentprice = @item.price
 
     return @item
+  end
+
+  def self.update_price(item)
+    new_item = self.parse(item.url)
+
+    if item.currentprice != new_item.price
+      puts 'Updated ' + item.title + ' to ' + new_item.price.to_s
+      item.currentprice = new_item.price
+      item.save
+    end
   end
 
   private
@@ -27,7 +38,8 @@ class ItemParser
 
     def self.image_of_item(doc)
       images = doc.xpath('//img').select{|image| is_item_image image}
-      if images
+
+      if images && images.count > 0
         return sanitise_url images[0]['src']
       end
       return nil

@@ -5,8 +5,11 @@
 
   <span class="buygroup">
     <a href="<%= item.url %>" class="buy btn btn-small btn-primary" target="_blank">Buy</a>
-    <% if item.price && item.price > 0.0 %>
-    <span class="price">£<%= item.price %></span>
+    <% if has_price?(item) %>
+    <span class="price <%= css_class_for_current_price(item) %>">£<%= current_price?(item) %></span>
+    <% end %>
+    <% if show_old_price?(item) %>
+      <span class="price oldprice">(was £<%= item.price %>)</span>
     <% end %>
   </span>
 
