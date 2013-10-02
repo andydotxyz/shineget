@@ -186,3 +186,11 @@ ul.items {
 .item-row .buygroup .price {
   padding-top: 2px;
 }
+
+.price.cheaper {
+  color: green;
+}
+
+.price.dearer {
+  color: red;
+}

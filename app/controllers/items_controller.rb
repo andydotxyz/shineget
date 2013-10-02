@@ -42,19 +42,18 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /list/:list_id/items/findfromurl?url=something
+  # GET /lists/:list_id/items/findfromurl?url=something
   def find_from_url
     @list = List.find(params[:list_id])
 
     @item = ItemParser.parse(params['url'])
-    @item.id = -1
 
     @add_url = '/lists/' + @list.id.to_s + '/items/addfromurl?url=' + CGI::escape(params['url'])
     @edit_url = new_list_item_path + '?list_id=' + @list.id.to_s + '&url=' + @item.url + '&title=' + @item.title.to_s +
     '&imgurl=' + @item.imgurl.to_s + '&price=' + @item.price.to_s + '&notes=' + @item.notes.to_s
   end
 
-  # POST /list/:list_id/items/addfromurl?url=something
+  # POST /lists/:list_id/items/addfromurl?url=something
   def add_from_url
     @list = List.find(params[:list_id])
 
