@@ -18,7 +18,7 @@
       <tr>
         <td><%= item.url %></td>
         <td><%= item.notes %></td>
-        <td><%= item.price %></td>
+        <td><%= '%.2f' % item.price %></td>
         <td><%= item.list_id %></td>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>

@@ -13,7 +13,7 @@
 
       <span class="buygroup">
         <% if item.price && item.price > 0.0 %>
-        <span class="price">£<%= item.price %></span>
+        <span class="price">£<%= '%.2f' % item.price %></span>
         <% end %>
       </span>
 
