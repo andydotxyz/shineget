@@ -1,5 +1,5 @@
 <div class="center hero-unit">
-  <h1>Welcome to <img src="/images/coin-small.png" style="margin-top:-8px;"/> Shine Get</h1>
+  <h1><span class="hiddenonmobile">Welcome to</span> <img src="/images/coin-small.png" style="margin-top:-8px;"/> Shine Get</h1>
 
   <% if signed_in? %>
   <h2>
@@ -19,7 +19,8 @@
   </form>
   <% else %>
   <h2>
-    This is the home page for my shine get app.
+    Shine get is a universal wish list to keep track of all your shopping desires
+    and let you know when you should buy them.
   </h2>
 
   <%= link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary" %>

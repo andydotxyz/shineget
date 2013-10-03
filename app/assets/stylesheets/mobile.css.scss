@@ -3,6 +3,10 @@ body {
   padding-top: 0;
 }
 
+.hiddenonmobile {
+  display: none;
+}
+
 /* mobile specific styling */
 
 body div.container {
@@ -21,7 +25,10 @@ img.gravatar {
 
 h1 {
   margin: 0 !important;
-  text-align:right !important;
+}
+
+.user-details h1 {
+  text-align: right !important;
 }
 
 div.user-details p{
