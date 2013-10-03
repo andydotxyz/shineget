@@ -146,7 +146,7 @@ ul.items {
   margin-bottom: 10px;
 }
 
-.item-row .url {
+.item-row .title {
   font-weight: bold;
   font-size: 125%;
 }
@@ -180,11 +180,19 @@ ul.items {
 .item-row .buygroup {
   float: left;
   position: absolute;
-  margin-top: 84px;
+  margin-top: 80px;
 }
 
 .item-row .buygroup .price {
-  padding-top: 2px;
+  vertical-align: middle;
+
+  font-size: 120%;
+}
+
+.item-row .buygroup .oldprice {
+  color: gray;
+  font-size: 90%;
+  vertical-align: bottom;
 }
 
 .price.cheaper {

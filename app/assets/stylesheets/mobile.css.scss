@@ -1,0 +1,63 @@
+/* Remove top padding when top navbar goes static in narrow viewports */
+body {
+  padding-top: 0;
+}
+
+/* mobile specific styling */
+
+body div.container {
+  font-size: 80%;
+}
+
+body div.navbar-inner {
+  font-size: 125%;
+}
+
+img.gravatar {
+  width: 100px !important;
+  height: 100px !important;
+  float: left;
+}
+
+h1 {
+  margin: 0 !important;
+  text-align:right !important;
+}
+
+div.user-details p{
+  text-align: right !important;
+}
+
+.item-row {
+  width: 100% !important;
+}
+
+.item-row .thumbnail {
+  margin-left: 0 !important;
+}
+
+
+div.tools {
+  position: absolute;
+  top: 165px;
+  right: 20px;
+}
+
+span.actions a {
+  display: block;
+  text-align: right;
+  height: 14pt;
+}
+
+span.actions .divide {
+  display: none;
+}
+
+span.actions {
+  margin-top: 76px !important;
+}
+
+.item-row .buygroup .oldprice {
+  position: absolute;
+  bottom: 25pt;
+}

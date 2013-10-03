@@ -4,7 +4,7 @@
   <% end %>
 
   <span class="buygroup">
-    <a href="<%= item.url %>" class="buy btn btn-small btn-primary" target="_blank">Buy</a>
+    <a href="<%= item.url %>" class="buy btn btn-primary" target="_blank">Buy</a>
     <% if has_price?(item) %>
     <span class="price <%= css_class_for_current_price(item) %>">£<%= '%.2f' % current_price?(item) %></span>
     <% end %>
@@ -15,12 +15,12 @@
 
   <% if current_user?item.list.user %>
   <span class="actions">
-    <%= link_to 'Edit', edit_item_path(item) %> |
+    <%= link_to 'Edit', edit_item_path(item) %> <span class="divide">|</span>
     <%= link_to 'Remove', item, method: 'delete' %>
   </span>
   <% end %>
 
-  <span class="url"><%= item.title %></span>
+  <span class="title"><%= item.title %></span>
 
   <span class="notes"><%= item.notes %></span>
 

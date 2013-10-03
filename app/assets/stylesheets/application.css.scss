@@ -9,13 +9,6 @@ body {
   padding-top: 60px;
 }
 
-/* Remove top padding when top navbar goes static in narrow viewports */
-@media (max-width: 979px) {
-  body {
-    padding-top: 0;
-  }
-}
-
 // Responsive styles go here in case you want them
 @import "bootstrap-responsive";
 
@@ -24,3 +17,7 @@ body {
 
 // Whatever application styles you have go last
 @import "custom";
+
+@media (max-width: 979px) {
+  @import "mobile";
+}
