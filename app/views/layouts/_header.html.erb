@@ -11,7 +11,7 @@
       <nav class="nav-collapse">
         <ul class="nav pull-right">
           <li><%= link_to "Home",    '/' %></li>
-          <li><%= link_to "Help",    '#' %></li>
+          <li><%= link_to "Help",    '/about' %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -19,7 +19,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Wish Lists", current_user %></li>
-                <li><%= link_to "Settings", '#' %></li>
+                <!--<li><%= link_to "Settings", '#' %></li>-->
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", signout_path, method: "delete" %>
