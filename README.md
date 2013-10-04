@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ajwillia-ms/shineget.png?label=ready)](https://waffle.io/ajwillia-ms/shineget)  
 ShineGet.me
 -----------
 
