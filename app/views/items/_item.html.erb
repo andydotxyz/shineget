@@ -1,6 +1,12 @@
 <li class="item-row <%= cycle('odd', 'even') -%>">
   <% if item.imgurl.present? %>
-      <div class="thumbnail" style="background-image: url('<%= item.imgurl %>');"></div>
+    <div class="thumbnail" style="background-image: url('<%= item.imgurl %>');">
+      <div class="share">
+        <a href="javascript:facebook_share_item<%= item.id %>()"><img class="share-item" src="/images/social/facebook.png" /></a>
+        <a href="javascript:twitter_share_item<%= item.id %>()"><img class="share-item" src="/images/social/twitter.png" /></a>
+      </div>
+      <div class="share-background"></div>
+    </div>
   <% end %>
 
   <span class="buygroup">
@@ -24,4 +30,22 @@
 
   <span class="notes"><%= item.notes %></span>
 
+  <script>
+    function facebook_share_item<%= item.id %>() {
+      FB.ui({
+        method: 'feed',
+        link: '<%= item_url item %>',
+        name: '<%= item.title %>',
+        caption: 'I just added this to my wish list',
+        picture: '<%= item.imgurl %>'
+      }, function(response){});
+    }
+
+    function twitter_share_item<%= item.id %>() {
+      window.open('http://twitter.com/share?url=<%= CGI::escape(item_url item) %>' +
+              '&img=<%= CGI::escape(item.imgurl) %>' +
+              '&text=I%20just%20added%20"<%= item.title %>"%20to%20my%20@ShineGetMe%20wish%20list&',
+              'twitterwindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+    }
+  </script>
 </li>

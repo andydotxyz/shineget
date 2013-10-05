@@ -12,8 +12,26 @@
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+
+    <script type="text/javascript">
+      (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "http://connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+      }(document));
+      window.fbAsyncInit = function() {
+        FB.init( {
+          appId : '445159028938726',
+          xfbml : true
+        } );
+        FB.apiDidInit = true;
+      }
+    </script>
   </head>
   <body>
+    <div id="fb-root"></div>
     <%= render 'layouts/header' %>
     <div class="container">
       <% flash.each do |key, value| %>
