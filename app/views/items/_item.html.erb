@@ -44,7 +44,7 @@
     function twitter_share_item<%= item.id %>() {
       window.open('http://twitter.com/share?url=<%= CGI::escape(item_url item) %>' +
               '&img=<%= CGI::escape(item.imgurl) %>' +
-              '&text=I%20just%20added%20"<%= item.title %>"%20to%20my%20@ShineGetMe%20wish%20list&',
+              '&text=I%20just%20added%20"<%= CGI::escape(item.title) %>"%20to%20my%20@ShineGetMe%20wish%20list&',
               'twitterwindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
     }
   </script>
