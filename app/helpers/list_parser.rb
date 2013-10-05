@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class ListParser
-  def self.parse(url_or_file)
+  def self.parse(url_or_file, limit=0)
 
     @list = List.new
     @list.url = url_or_file
@@ -11,14 +11,27 @@ class ListParser
     doc = Nokogiri::HTML(open(url_or_file))
 
     @list.name = title_of_item doc
+    urls = list_of_items(doc);
+    @list.total = urls.count
 
-    list_of_items(doc).each { |item|
+    count = 0
+    urls.each { |item|
+      if count >= limit and limit != 0
+        break
+      end
+
       obj = ItemParser.parse(item)
       obj.list = @list
+
       @list.items << obj
+      count += 1
     }
 
     return @list
+  end
+
+  def self.parse_sample(url_or_file)
+    self.parse(url_or_file, 6)
   end
 
   private

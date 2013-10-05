@@ -21,29 +21,33 @@ class ListsController < ApplicationController
 
   # GET /lists/findfromurl?url=something
   def find_from_url
-    @list = ListParser.parse(params['url'])
+    @list = ListParser.parse_sample(params['url'])
 
     @add_url = '/lists/addfromurl?url=' + CGI::escape(params['url'])
   end
 
   # POST /lists/addfromurl?url=something
   def add_from_url
-    @list = ListParser.parse(params['url'])
-    @list.user = current_user
+    fork do
+      @list = ListParser.parse(params['url'])
+      @list.user = current_user
 
-    items_cache = []
-    @list.items.each { |item| items_cache << item }
-    @list.items.clear
-    @list.save!
+      items_cache = []
+      @list.items.each { |item| items_cache << item }
+      @list.items.clear
+      @list.save!
 
-    items_cache.each { |item|
-      item.list = @list
-      @list.items << item
+      items_cache.each { |item|
+        item.list = @list
+        @list.items << item
 
-      item.save!
-    }
-    @list.save!
+        item.save!
+      }
+      @list.save!
+      exit
+    end
 
+    flash.keep[:info] = 'Your wish list is being added and will appear shortly'
     redirect_to current_user
   end
 

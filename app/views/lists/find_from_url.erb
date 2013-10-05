@@ -3,6 +3,7 @@
 <h3><%= @list.name %></h3>
 <p><%= @list.url %></p>
 
+<p>List contains <span class="total"><%= @list.total %></span> items including the following:</p>
 <% if @list.items.any? %>
   <% @list.items.each do |item| %>
 
