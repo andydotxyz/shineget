@@ -1,4 +1,8 @@
 module ItemsHelper
+  def buy_url(item)
+    (item_url item).to_s + '/buy'
+  end
+
   def has_price?(item)
     item.price and item.price != 0
   end

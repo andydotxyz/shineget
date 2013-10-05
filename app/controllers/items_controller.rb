@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :buy, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
 
   # GET /items
@@ -13,6 +13,13 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    redirect_to @item.url
+  end
+
+  # GET /items/1/buy
+  def buy
+    # TODO log that someone clicked buy
+    redirect_to @item.url
   end
 
   # GET /list/:list_id/items/new
@@ -111,7 +118,7 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
+      @item = Item.find(params[:item_id]?params[:item_id]:params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
