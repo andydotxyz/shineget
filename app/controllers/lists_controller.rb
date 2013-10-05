@@ -32,12 +32,11 @@ class ListsController < ApplicationController
     @list.user = current_user
 
     items_cache = []
-    @list.items.each { |item| items_cache << item; puts 'cached => ' + item.title }
+    @list.items.each { |item| items_cache << item }
     @list.items.clear
     @list.save!
 
     items_cache.each { |item|
-      puts 'adding => ' + item.title
       item.list = @list
       @list.items << item
 

@@ -110,7 +110,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to list_items_url @item.list }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end
