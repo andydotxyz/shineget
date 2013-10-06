@@ -10,7 +10,12 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @list = List.new
+    new_url = nil
+    if params['website'] == 'amazon.co.uk' && params['identifier']
+      new_url = 'http://www.amazon.co.uk/registry/wishlist/' + params['identifier'] + '?items-per-page=10000'
+    end
+
+    redirect_to '/lists/findfromurl?url=' + CGI::escape(new_url) if new_url
   end
 
   # GET /lists/findfromurl?url=something
