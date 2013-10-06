@@ -79,4 +79,11 @@ class ItemParserTest < ActionView::TestCase
                     :imgurl => 'http://static.toysrus.co.uk//medias/sys_master/h29/hb4/8810489217054.jpg',
                     :price => 34.99 )
   end
+
+  test 'parsing real lego html gets correct data' do
+    run_data_tests( 'delorean',
+                    :title => 'The DeLorean time machine',
+                    :imgurl => 'http://cache.lego.com/e/dynamic/is/image/LEGO/21103?$main$',
+                    :price => 34.99 )
+  end
 end

@@ -37,6 +37,9 @@ class ItemParser
     end
 
     def self.image_of_item(doc)
+      image = doc.xpath('//img[@id="product-zoomview"]')
+      return image.attribute('src').to_s if image.present?
+
       images = doc.xpath('//img').select{|image| is_item_image image}
 
       if images && images.count > 0
@@ -49,10 +52,14 @@ class ItemParser
       if image.attribute('id').to_s.scan(/productImage/i).present?
         return true
       end
+      if image.attribute('class').to_s.include?'data-image'
+        return true
+      end
+
       if image.attribute('id').to_s.scan(/logo|zoom/i).present?
         return false
       end
-      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|pixel|logo|adserver/i).present?
+      if image.attribute("src").to_s.scan(/icon|CSS|currency|sprite|common|banners|pixel|logo|adserver/i).present?
         return false
       end
       if image.attribute('alt').to_s.scan(/deals/i).present?
@@ -88,6 +95,12 @@ class ItemParser
 
       # then look for prices in things marked as prices in the class
       doc.css('.priceLarge').each do |node|
+        price = price_in_text node.text
+        if price > 0.0
+          return price
+        end
+      end
+      doc.css('.product-price').each do |node|
         price = price_in_text node.text
         if price > 0.0
           return price
