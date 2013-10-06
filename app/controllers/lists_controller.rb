@@ -2,12 +2,6 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
 
-  # GET /lists
-  # GET /lists.json
-  def index
-    @lists = List.all
-  end
-
   # GET /lists/1
   # GET /lists/1.json
   def show
@@ -90,7 +84,7 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
     respond_to do |format|
-      format.html { redirect_to lists_url }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end

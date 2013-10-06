@@ -44,6 +44,6 @@ class ListsControllerTest < ActionController::TestCase
       delete :destroy, id: @list
     end
 
-    assert_redirected_to lists_path
+    assert_redirected_to current_user
   end
 end
