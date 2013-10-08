@@ -7,11 +7,14 @@
         <span class="icon-bar"></span>
       </a>
       <img src="/images/coin-tiny.png" style="float:left; width: 24px; padding-top:8px; padding-right: 4px" />
-      <%= link_to "shine get", '/', id: "logo" %>
+      <% if signed_in? %>
+          <%= link_to "shine get", current_user, id: "logo" %>
+      <% else %>
+          <%= link_to "shine get", '/', id: "logo" %>
+      <% end %>
       <nav class="nav-collapse">
         <ul class="nav pull-right">
-          <li><%= link_to "Home",    '/' %></li>
-          <li><%= link_to "Help",    '/about' %></li>
+          <li><%= link_to "Help", '/about' %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
