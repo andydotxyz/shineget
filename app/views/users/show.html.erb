@@ -1,9 +1,28 @@
 <% provide(:title, @user.username) %>
+
+<script>
+    function facebook_share() {
+        FB.ui({
+            method: 'feed',
+            link: '<%= url_for(@user) %>',
+            name: '<%= @user.username %>\'s wish list at ShineGet.me',
+            caption: 'I just updated my wish list',
+            picture: '<%= gravatar_url_for @user %>'
+        }, function(response){});
+    }
+
+    function twitter_share() {
+        window.open('http://twitter.com/share?url=<%= CGI::escape(url_for(@user)) %>' +
+                '&text=I%20just%20updated%20my%20wish%20list%20at%20ShineGet.me&',
+                'twitterwindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+    }
+</script>
+
 <div class="user-details">
   <% if signed_in? %>
-      <div class="tools">
-        <%= link_to 'Edit', edit_user_path(@user) %>
-      </div>
+    <div class="tools">
+      <%= link_to 'Edit', edit_user_path(@user) %>
+    </div>
   <% end %>
 
   <h1>
@@ -15,6 +34,13 @@
     <strong>Fullname:</strong>
     <%= @user.fullname %>
   </p>
+
+  <% if signed_in? %>
+      <div class="share-list">
+        <a href="javascript:facebook_share()"><img class="share-item" src="/images/social/facebook.png" /></a>
+        <a href="javascript:twitter_share()"><img class="share-item" src="/images/social/twitter.png" /></a>
+      </div>
+  <% end %>
 
   <p>
     <strong>Email:</strong>
