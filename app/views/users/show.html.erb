@@ -5,8 +5,8 @@
         FB.ui({
             method: 'feed',
             link: '<%= url_for(:id => @user, :only_path => false) %>',
-            name: '<%= @user.username %>\'s wish list at ShineGet.me',
-            caption: 'I just updated my wish list',
+            name: 'I just updated my wish list!',
+            caption: 'Check out <%= @user.fullname %>\'s wish list at ShineGet.me',
             picture: '<%= gravatar_url_for @user %>'
         }, function(response){});
     }
