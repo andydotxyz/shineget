@@ -35,7 +35,7 @@
     <%= @user.fullname %>
   </p>
 
-  <% if signed_in? %>
+  <% if current_user?(@user) %>
       <div class="share-list">
         <a href="javascript:facebook_share()"><img class="share-item" src="/images/social/facebook.png" /></a>
         <a href="javascript:twitter_share()"><img class="share-item" src="/images/social/twitter.png" /></a>

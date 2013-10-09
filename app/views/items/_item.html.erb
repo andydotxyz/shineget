@@ -1,7 +1,7 @@
 <li class="item-row <%= cycle('odd', 'even') -%>">
   <% if item.imgurl.present? %>
     <div class="thumbnail" style="background-image: url('<%= item.imgurl %>');">
-      <% if signed_in? %>
+      <% if current_user?item.list.user %>
       <div class="share">
         <a href="javascript:facebook_share_item<%= item.id %>()"><img class="share-item" src="/images/social/facebook.png" /></a>
         <a href="javascript:twitter_share_item<%= item.id %>()"><img class="share-item" src="/images/social/twitter.png" /></a>
