@@ -11,7 +11,7 @@ class ListParser
     doc = Nokogiri::HTML(open(url_or_file))
 
     @list.name = title_of_item doc
-    urls = list_of_items(doc);
+    urls = list_of_items(doc)
     @list.total = urls.count
 
     count = 0
@@ -34,6 +34,33 @@ class ListParser
     self.parse(url_or_file, 6)
   end
 
+  def self.update_list(list)
+    return if list.is_local?
+
+    doc = Nokogiri::HTML(open(list.url))
+
+    new_urls = list_of_items(doc)
+    old_urls = list.items.map{|item| item.url}
+
+    added_urls = new_urls.reject{|url| old_urls.include? url}
+    removed_urls = old_urls.reject{|url| new_urls.include? url}
+
+    removed_urls.each{|url|
+      item = list.item_for_url url
+
+      item.destroy!
+    }
+
+    added_urls.each{|url|
+      item = ItemParser.parse(url)
+
+      item.list = list
+      list.items << item
+
+      item.save!
+    }
+  end
+
   private
     def self.title_of_item(doc)
       if doc.at_css('h1')
@@ -46,6 +73,6 @@ class ListParser
       items = []
       # amazon.co.uk
       doc.xpath('//*[@class="productImage"]/a/@href').each { |href| items.append href.value }
-      return items
+      return items.reverse
     end
 end

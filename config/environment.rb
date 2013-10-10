@@ -5,3 +5,4 @@ require File.expand_path('../application', __FILE__)
 Shineget::Application.initialize!
 
 PriceWorker.new.schedule
+SyncWorker.new.schedule
