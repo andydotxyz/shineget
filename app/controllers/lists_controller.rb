@@ -15,14 +15,14 @@ class ListsController < ApplicationController
       new_url = 'http://www.amazon.co.uk/registry/wishlist/' + params['identifier'] + '?items-per-page=10000'
     end
 
-    redirect_to '/lists/findfromurl?url=' + CGI::escape(new_url) if new_url
+    redirect_to '/lists/findfromurl?url=' + CGI::escape(new_url) + '&source=' + params['website'] if new_url
   end
 
   # GET /lists/findfromurl?url=something
   def find_from_url
     @list = ListParser.parse_sample(params['url'])
 
-    @add_url = '/lists/addfromurl?url=' + CGI::escape(params['url'])
+    @add_url = '/lists/addfromurl?url=' + CGI::escape(params['url']) + '&source=' + params['source']
   end
 
   # POST /lists/addfromurl?url=something
@@ -30,6 +30,7 @@ class ListsController < ApplicationController
     fork do
       @list = ListParser.parse(params['url'])
       @list.user = current_user
+      @list.source = params['source']
 
       items_cache = []
       @list.items.each { |item| items_cache << item }

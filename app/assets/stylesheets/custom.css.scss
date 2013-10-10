@@ -170,11 +170,16 @@ ul.items {
   background-size: 100px;
 }
 
-.item-row .actions {
+.item-row .actions, .item-row .source {
   position: absolute;
   right: 0;
   margin-top: 88px;
   margin-right: 10px;
+}
+
+.item-row .source {
+  color: darkgray;
+  font-style: italic;
 }
 
 .item-row .buygroup {
