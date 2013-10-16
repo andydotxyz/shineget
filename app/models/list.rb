@@ -1,7 +1,7 @@
 class List < ActiveRecord::Base
   belongs_to :user
   validates :user_id, presence: true
-  has_many :items, :order => 'created_at DESC'
+  has_many :items, -> { order('created_at DESC') }
 
   @total = 0
   attr_accessor :total
