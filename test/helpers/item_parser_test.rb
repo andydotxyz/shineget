@@ -86,4 +86,11 @@ class ItemParserTest < ActionView::TestCase
                     :imgurl => 'http://cache.lego.com/e/dynamic/is/image/LEGO/21103?$main$',
                     :price => 34.99 )
   end
+
+  test 'parsing real argos html gets correct data' do
+    run_data_tests( 'argos',
+                    :title => 'Hornby Virgin Trains Pendolino 00 Gauge Train Set.',
+                    :imgurl => 'http://www.argos.co.uk/wcsstore/argos/images/541-4623184IEUC1208071M.jpg',
+                    :price => 130.00 )
+  end
 end

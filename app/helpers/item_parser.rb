@@ -30,15 +30,17 @@ class ItemParser
 
   private
     def self.title_of_item(doc)
-      if doc.at_css('h1')
-        return doc.at_css('h1').text.strip
-      end
+      h1s = doc.xpath('//h1')
+      return h1s[0].text.strip if h1s.count > 0 and h1s[0].text.strip.length > 0
+      return h1s[1].text.strip if h1s.count > 1 and h1s[1].text.strip.length > 0
       return doc.title.strip
     end
 
     def self.image_of_item(doc)
       image = doc.xpath('//img[@id="product-zoomview"]')
       return image.attribute('src').to_s if image.present?
+      image = doc.xpath('//img[@id="mainimage"]')
+      return 'http://www.argos.co.uk' + image.attribute('src').to_s if image.present?
 
       images = doc.xpath('//img').select{|image| is_item_image image}
 
@@ -52,7 +54,7 @@ class ItemParser
       if image.attribute('id').to_s.scan(/productImage/i).present?
         return true
       end
-      if image.attribute('class').to_s.include?'data-image'
+      if image.attribute('class').to_s.scan(/data-image|main-image/i).present?
         return true
       end
 
