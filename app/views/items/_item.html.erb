@@ -24,7 +24,6 @@
   <% if item.list.is_local? %>
     <% if current_user?item.list.user %>
       <span class="actions">
-        <%= link_to 'Edit', edit_item_path(item) %> <span class="divide">|</span>
         <%= link_to 'Remove', item, method: 'delete' %>
       </span>
     <% end %>
