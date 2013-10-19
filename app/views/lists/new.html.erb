@@ -1,16 +1,29 @@
 <h1>Import list</h1>
 
-<%= form_tag({:controller => 'lists', :action => 'new'}, :method => "get") do %>
-  <div class="field">
-    <%= label_tag :website %><br>
-    <%= select_tag :website, options_for_select(['amazon.co.uk']) %>
+<%= form_tag({:controller => 'lists', :action => 'new'}, :method => 'get', :class => 'form-horizontal') do %>
+  <div class="control-group">
+    <div class="field">
+      <%= label_tag :website, nil, :class => 'control-label' %>
+      <div class="controls">
+        <%= select_tag :website, options_for_select(['amazon.co.uk']), :class => 'input-xlarge' %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag :identifier %><br>
-    <%= text_field_tag :identifier %>
+  <div class="control-group">
+    <div class="field">
+      <label for="identifier" class="control-label">List ID</label>
+      <div class="controls">
+        <%= text_field_tag :identifier, nil, :class => 'input-xlarge' %>
+          <i class="icon-question-sign icon-large" rel="popover" data-title='Finding an item ID'
+             data-content='When logged into amazon.co.uk go to your Wish List page and tap "Share with Friends (email)".
+                           The URL that appears will have a long number in it - this is your list ID.'></i>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= submit_tag 'Import List', :class => 'btn btn-primary' %>
+  <div class="control-group">
+    <div class="actions controls">
+      <%= submit_tag 'Import List', :class => 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
 

@@ -5,6 +5,9 @@
     <%= stylesheet_link_tag "application", media: "all",
                                            "data-turbolinks-track" => true %>
     <link data-turbolinks-track="true" href="<%= ActionController::Base.new.view_context.asset_path params[:controller] + '.css' %>" media="all" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
@@ -41,6 +44,9 @@
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
+    <script>
+      $("i[rel=popover]").popover();
+    </script>
   </body>
 </html>
 
