@@ -17,9 +17,20 @@ class ItemsController < ApplicationController
 
   # GET /lists/:list_id/items/findfromurl?url=something
   def find_from_url
+    if params['url'].empty?
+      flash.keep[:error] = 'Item URL is required'
+      redirect_to '/'
+      return
+    end
+
     @list = List.find(params[:list_id])
 
-    @item = ItemParser.parse(params['url'])
+    begin
+      @item = ItemParser.parse(params['url'])
+    rescue StandardError => e
+      flash.keep[:error] = 'Unable to import list - ' + e.message
+      redirect_to '/'
+    end
 
     @add_url = '/lists/' + @list.id.to_s + '/items/addfromurl?url=' + CGI::escape(params['url'])
   end

@@ -27,7 +27,12 @@ class ListsController < ApplicationController
 
   # GET /lists/findfromurl?url=something
   def find_from_url
-    @list = ListParser.parse_sample(params['url'])
+    begin
+      @list = ListParser.parse_sample(params['url'])
+    rescue StandardError => e
+      flash.now[:error] = 'Unable to import list - ' + e.message
+      render :new
+    end
 
     @add_url = '/lists/addfromurl?url=' + CGI::escape(params['url']) + '&source=' + params['source']
   end
