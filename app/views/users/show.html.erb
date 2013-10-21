@@ -19,7 +19,7 @@
 </script>
 
 <div class="user-details">
-  <% if signed_in? %>
+  <% if current_user?(@user) %>
     <div class="tools">
       <%= link_to 'Edit', edit_user_path(@user) %>
     </div>
