@@ -42,6 +42,9 @@ class ItemParser
       image = doc.xpath('//img[@id="mainimage"]')
       return 'http://www.argos.co.uk' + image.attribute('src').to_s if image.present?
 
+      node = doc.xpath('//*[@data-large-image-href]')
+      return node.attribute('data-large-image-href').to_s if node.present?
+
       images = doc.xpath('//img').select{|image| is_item_image image}
 
       if images && images.count > 0
@@ -103,6 +106,16 @@ class ItemParser
         end
       end
       doc.css('.product-price').each do |node|
+        price = price_in_text node.text
+        if price > 0.0
+          return price
+        end
+      end
+      doc.css('.currency-value').each do |node|
+        if node.parent.attribute('class').to_s.start_with?'shipping'
+          next
+        end
+
         price = price_in_text node.text
         if price > 0.0
           return price

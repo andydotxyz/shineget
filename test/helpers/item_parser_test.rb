@@ -93,4 +93,11 @@ class ItemParserTest < ActionView::TestCase
                     :imgurl => 'http://www.argos.co.uk/wcsstore/argos/images/541-4623184IEUC1208071M.jpg',
                     :price => 130.00 )
   end
+
+  test 'parsing real etsy html gets correct data' do
+    run_data_tests( 'etsy',
+                    :title => 'Retro Apron - Ms. Mouse Sexy Womans Aprons - Vintage Apron Style - Polka Dots Pin up Sweetheart Rockabilly Cosplay',
+                    :imgurl => 'http://img0.etsystatic.com/037/0/5347629/il_570xN.513126640_7x0m.jpg',
+                    :price => 53.97 )
+  end
 end
