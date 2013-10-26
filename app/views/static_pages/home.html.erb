@@ -2,9 +2,9 @@
   <h1><span class="hiddenonmobile">Welcome to</span> <img src="/images/coin-small.png" style="margin-top:-8px;"/> Shine Get</h1>
 
   <% if signed_in? %>
-  <h2>
+  <p>
     Add a new item to your wishlist by entering the URL below.
-  </h2>
+  </p>
 
   <% @current_user.lists.each do |list| %>
     <% if list.url.blank? %>
@@ -18,10 +18,10 @@
     </div>
   </form>
   <% else %>
-  <h2>
+  <p>
     Shine get is a universal wish list to keep track of all your shopping desires
     and let you know when you should buy them.
-  </h2>
+  </p>
 
   <%= link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary" %>
   <% end %>
