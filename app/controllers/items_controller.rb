@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :buy, :destroy]
+  before_action :set_item, only: [:show, :buy, :bought, :cancelled, :destroy]
 
   # GET /items/1
   # GET /items/1.json
@@ -11,8 +11,20 @@ class ItemsController < ApplicationController
 
   # GET /items/1/buy
   def buy
-    # TODO log that someone clicked buy
-    redirect_to @item.url
+    @item.bought = true
+    @item.save
+  end
+
+  def bought
+    @item.bought = true
+    @item.save
+    redirect_to @item.list.user
+  end
+
+  def cancelled
+    @item.bought = false
+    @item.save
+    redirect_to @item.list.user
   end
 
   # GET /lists/:list_id/items/findfromurl?url=something

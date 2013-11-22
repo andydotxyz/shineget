@@ -52,10 +52,11 @@
   <div class="itemlist">
     <% if @user.lists.any? %>
       <% @user.lists.each do |list| %>
+        <% available = list.items.select{|i|!i.bought} %>
 
         <h3 class="name">
 <!--
-          <%= list.name %> (<%= list.items.count %> items)
+          <%= list.name %> (<%= available.count %> items)
 -->
           <% if list.is_local? && current_user && current_user == @user %>
             <form action="/lists/<%= list.id %>/items/findfromurl">
@@ -72,9 +73,9 @@
           <span class="url"> - <%= list.url %></span>
         <% end %>
 -->
-        <% if list.items.any? %>
+        <% if available.any? %>
           <ul class="items">
-            <%= render list.items %>
+            <%= render available %>
           </ul>
           <div class="after-items"></div>
         <% end %>

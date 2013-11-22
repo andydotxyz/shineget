@@ -7,6 +7,8 @@ Shineget::Application.routes.draw do
     match 'items/addfromurl', :controller => 'items', :action => 'add_from_url', via: 'post'
     resources :items, shallow: true do
       match 'buy', :controller => 'items', :action => 'buy', via: 'get'
+      match 'bought', :controller => 'items', :action => 'bought', via: 'get'
+      match 'cancelled', :controller => 'items', :action => 'cancelled', via: 'get'
     end
   end
 

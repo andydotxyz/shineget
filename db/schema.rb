@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010220738) do
+ActiveRecord::Schema.define(version: 20131122214243) do
 
   create_table "items", force: true do |t|
     t.string   "url"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20131010220738) do
     t.string   "title"
     t.string   "imgurl"
     t.decimal  "currentprice"
+    t.boolean  "bought"
   end
 
   create_table "lists", force: true do |t|

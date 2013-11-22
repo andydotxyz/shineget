@@ -12,7 +12,7 @@
   <% end %>
 
   <span class="buygroup">
-    <a href="<%= buy_url item %>" class="buy btn btn-primary" target="_blank">Buy</a>
+    <a onclick="window.open('<%= item.url %>'); window.location.href = '<%= buy_url item %>';" class="buy btn btn-primary" target="_blank">Buy</a>
     <% if has_price?(item) %>
     <span class="price <%= css_class_for_current_price(item) %>">£<%= '%.2f' % current_price?(item) %></span>
     <% end %>

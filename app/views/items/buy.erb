@@ -1,0 +1,28 @@
+<h1>Buy item</h1>
+
+<p>Did you buy this item?</p>
+
+<div class="item-row after-items item-preview">
+  <% if @item.imgurl.present? %>
+      <div class="thumbnail" style="background-image: url('<%= @item.imgurl %>');"></div>
+  <% end %>
+
+  <span class="buygroup">
+    <% if @item.price && @item.price > 0.0 %>
+    <span class="price">£<%= '%.2f' % @item.price %></span>
+    <% end %>
+  </span>
+
+  <span class="title"><%= @item.title %></span>
+
+  <span class="notes"><%= @item.notes %></span>
+
+</div>
+
+<div class="preview-options">
+  <%= link_to "Yes", {:controller => "items", :action => "bought"}, {:class=>"btn btn-primary" }  %>
+  &nbsp;
+  <%= link_to "No", {:controller => "items", :action => "cancelled"}, {:class=>"btn btn-warning" }  %>
+</div>
+
+<div style="clear:both"></div>
