@@ -8,8 +8,8 @@
   <% end %>
 
   <span class="buygroup">
-    <% if @item.price && @item.price > 0.0 %>
-    <span class="price">£<%= '%.2f' % @item.price %></span>
+    <% if has_price?(@item) %>
+    <span class="price">£<%= '%.2f' % current_price(@item) %></span>
     <% end %>
   </span>
 

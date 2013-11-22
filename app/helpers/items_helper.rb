@@ -7,7 +7,7 @@ module ItemsHelper
     item.price and item.price != 0
   end
 
-  def current_price?(item)
+  def current_price(item)
     if item.currentprice and item.currentprice != 0
       item.currentprice
     else
