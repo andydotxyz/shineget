@@ -12,7 +12,7 @@ Shineget::Application.routes.draw do
     end
   end
 
-  resources :users, :id => /[A-Za-z0-9\.]+?/, :format => /json|html/
+  resources :users, :id => /[A-Za-z0-9\.]+?/, :format => /json|html|xml/
 
   resources :sessions, only: [:new, :create, :destroy]
 

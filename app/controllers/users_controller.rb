@@ -12,8 +12,19 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  # GET /users/1.xml
   def show
     @user = User.find_by_username(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user.to_json( :except => [:id, :password_digest, :remember_token],
+                                                :include => { :lists => { :except => [:id, :user_id],
+                                                                          :include => { :items => { :except => [:id, :list_id] } } } } ) }
+      format.xml { render json: @user.to_xml( :except => [:id, :password_digest, :remember_token],
+                                              :include => { :lists => { :except => [:id, :user_id],
+                                                                        :include => { :items => { :except => [:id, :list_id] } } } } ) }
+    end
   end
 
   # GET /users/new
