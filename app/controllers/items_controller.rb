@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/buy
   def buy
-    @item.bought = true
+    @item.bought = false
     @item.save
   end
 
