@@ -72,7 +72,7 @@ class ListParser
     def self.list_of_items(doc)
       items = []
       # amazon.co.uk
-      doc.xpath('//*[@class="productImage"]/a/@href').each { |href| items.append href.value }
+      doc.xpath('//a[@id[starts-with(.,"itemName_")]]/@href').each { |href| items.append 'http://amazon.co.uk' + href.value }
       return items.reverse
     end
 end
