@@ -63,8 +63,8 @@ class ListParser
 
   private
     def self.title_of_item(doc)
-      if doc.at_css('h1')
-        return doc.title.strip + ' - ' + doc.at_css('h1').text.strip
+      if doc.at_css('div.profile')
+        return doc.title.strip + ' - ' + doc.at_css('div.profile span.stable span.a-size-base').text.strip
       end
       return doc.title.strip
     end
