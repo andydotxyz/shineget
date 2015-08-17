@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   # GET /users/1.xml
   def show
-    @user = User.find_by_username(params[:id])
+    (@user = User.find_by_username(params[:id])) or not_found and return
 
     respond_to do |format|
       format.html
