@@ -3,7 +3,7 @@ require 'rufus-scheduler'
 class PriceWorker
 
   def schedule
-    scheduler = Rufus::Scheduler.start_new
+    scheduler = Rufus::Scheduler.new
 
     scheduler.every("1d") do
       PriceWorker.new.perform

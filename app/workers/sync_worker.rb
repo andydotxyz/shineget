@@ -3,7 +3,7 @@ require 'rufus-scheduler'
 class SyncWorker
 
   def schedule
-    scheduler = Rufus::Scheduler.start_new
+    scheduler = Rufus::Scheduler.new
 
     scheduler.every("6h") do
       SyncWorker.new.perform
