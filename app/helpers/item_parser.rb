@@ -35,7 +35,8 @@ class ItemParser
       return h1s[1].text.strip if h1s.count > 1 and h1s[1].text.strip.length > 0
 
       return doc.css('#productTitle').text.strip if doc.css('#productTitle').present?
-      return doc.title.strip
+      return doc.title.strip if doc.title
+      return ""
     end
 
     def self.image_of_item(doc)
