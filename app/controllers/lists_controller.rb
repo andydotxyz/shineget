@@ -44,7 +44,7 @@ class ListsController < ApplicationController
       @list.user = current_user
 
       items_cache = []
-      @list.items.each { |item| items_cache << item }
+      @list.items.each { |item| items_cache.unshift item }
       @list.items.clear
       @list.save!
 
