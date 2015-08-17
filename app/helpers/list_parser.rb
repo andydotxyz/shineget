@@ -65,7 +65,7 @@ class ListParser
   private
     def self.title_of_item(doc)
       if doc.at_css('.g-profile-name')
-        return doc.at_css('.g-profile-name').text
+        return doc.title.strip + ' - ' + doc.at_css('.g-profile-name').text
       end
 
       if doc.at_css('h1')
