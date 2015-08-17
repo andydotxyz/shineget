@@ -28,7 +28,7 @@ class ListsController < ApplicationController
   # GET /lists/findfromurl?url=something
   def find_from_url
     begin
-      @list = ListParser.parse_sample(params['url'])
+      @list = ListParser.parse_sample(params['url'], params['source'])
     rescue StandardError => e
       flash.now[:error] = 'Unable to import list - ' + e.message
       render :new
@@ -40,9 +40,8 @@ class ListsController < ApplicationController
   # POST /lists/addfromurl?url=something
   def add_from_url
     fork do
-      @list = ListParser.parse(params['url'])
+      @list = ListParser.parse(params['url'], params['source'])
       @list.user = current_user
-      @list.source = params['source']
 
       items_cache = []
       @list.items.each { |item| items_cache << item }

@@ -3,15 +3,16 @@ require 'nokogiri'
 require 'open-uri'
 
 class ListParser
-  def self.parse(url_or_file, limit=0)
+  def self.parse(url_or_file, source, limit=0)
 
     @list = List.new
     @list.url = url_or_file
+    @list.source = source
 
     doc = Nokogiri::HTML(open(url_or_file))
 
     @list.name = title_of_item doc
-    urls = list_of_items(doc)
+    urls = list_of_items(doc, source)
     @list.total = urls.count
 
     count = 0
@@ -30,8 +31,8 @@ class ListParser
     return @list
   end
 
-  def self.parse_sample(url_or_file)
-    self.parse(url_or_file, 6)
+  def self.parse_sample(url_or_file, source)
+    self.parse(url_or_file, source, 6)
   end
 
   def self.update_list(list)
@@ -63,16 +64,25 @@ class ListParser
 
   private
     def self.title_of_item(doc)
+      if doc.at_css('.g-profile-name')
+        return doc.at_css('.g-profile-name').text
+      end
+
       if doc.at_css('h1')
         return doc.title.strip + ' - ' + doc.at_css('h1').text.strip
       end
       return doc.title.strip
     end
 
-    def self.list_of_items(doc)
+    def self.list_of_items(doc, domain)
       items = []
       # amazon.co.uk
-      doc.xpath('//*[@class="productImage"]/a/@href').each { |href| items.append href.value }
-      return items.reverse
+      doc.xpath('//*[contains(@class, "g-items-sec-atf")]//*[contains(@class, "g-itemImage")]/a/@href').each {
+          |href| items.append 'http://' + domain + '/' + href.value
+      }
+      doc.xpath('//*[contains(@class, "g-items-sec-btf")]//*[contains(@class, "g-itemImage")]/a/@href').each {
+        |href| items.append 'http://' + domain + '/' + href.value
+      }
+      return items
     end
 end
