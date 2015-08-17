@@ -105,6 +105,12 @@ class ItemParser
       end
 
       # then look for prices in things marked as prices in the class
+      doc.css('#priceblock_ourprice').each do |node|
+        price = price_in_text node.text
+        if price > 0.0
+          return price
+        end
+      end
       doc.css('.priceLarge').each do |node|
         price = price_in_text node.text
         if price > 0.0
@@ -163,7 +169,8 @@ class ItemParser
 
     def self.price_in_text(text)
       if text
-        return text.match(/(\d+[,.]\d+)/).to_s.to_f
+        # bear in mind that internationally this will not work
+        return text.match(/(\d+[,.]\d+)/).to_s.tr(',', '').to_f
       end
       return 0.0
     end
