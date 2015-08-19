@@ -87,6 +87,13 @@ class ItemParserTest < ActionView::TestCase
                     :price => 34.99 )
   end
 
+  test 'parsing real amazon html gets correct data' do
+    run_data_tests( 'amazon',
+                    :title => 'The Unofficial LEGO Technic Builder\'s Guide',
+                    :imgurl => 'http://ecx.images-amazon.com/images/I/41rJzTzb5ZL._SX398_BO1,204,203,200_.jpg',
+                    :price => 16.58 )
+  end
+
   test 'parsing real argos html gets correct data' do
     run_data_tests( 'argos',
                     :title => 'Hornby Virgin Trains Pendolino 00 Gauge Train Set.',

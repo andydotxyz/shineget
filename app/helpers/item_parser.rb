@@ -30,11 +30,12 @@ class ItemParser
 
   private
     def self.title_of_item(doc)
+      return doc.css('#productTitle').text.strip if doc.css('#productTitle').present?
+
       h1s = doc.xpath('//h1')
       return h1s[0].text.strip if h1s.count > 0 and h1s[0].text.strip.length > 0
       return h1s[1].text.strip if h1s.count > 1 and h1s[1].text.strip.length > 0
 
-      return doc.css('#productTitle').text.strip if doc.css('#productTitle').present?
       return doc.title.strip if doc.title
       return ""
     end
@@ -112,6 +113,12 @@ class ItemParser
         end
       end
       doc.css('.priceLarge').each do |node|
+        price = price_in_text node.text
+        if price > 0.0
+          return price
+        end
+      end
+      doc.css('.offer-price').each do |node|
         price = price_in_text node.text
         if price > 0.0
           return price
