@@ -107,4 +107,11 @@ class ItemParserTest < ActionView::TestCase
                     :imgurl => 'http://img0.etsystatic.com/037/0/5347629/il_570xN.513126640_7x0m.jpg',
                     :price => 53.97 )
   end
+
+  test 'parsing real rakuten html gets correct data' do
+    run_data_tests( 'rakuten',
+                    :title => 'Nintendo T-Shirt - Zelda Link',
+                    :imgurl => 'http://tshop.r10s.com/98f/4b6/f767/390c/90cb/40c1/d68f/1122e5ac7b005056ae5e1d.jpg',
+                    :price => 18.00 )
+  end
 end

@@ -45,6 +45,14 @@ class ItemParser
       return image.attribute('src').to_s if image.present?
       image = doc.css('img#product-zoomview')
       return image.attribute('src').to_s if image.present?
+      doc.css('script').each do |script|
+        if script.content.include? "dataLayer" and script.content.include? "prod_image_url"
+          pos = (script.content =~ /('prod_image_url':).*/)
+          var = script.content[pos..-1].match(/.*"(.*)".*/).captures[0]
+
+          return var if !var.empty?
+        end
+      end
 
       image = doc.xpath('//img[@id="mainimage"]')
       return 'http://www.argos.co.uk' + image.attribute('src').to_s if image.present?
