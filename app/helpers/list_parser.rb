@@ -40,7 +40,7 @@ class ListParser
 
     doc = Nokogiri::HTML(open(list.url))
 
-    new_urls = list_of_items(doc)
+    new_urls = list_of_items(doc, list.source)
     old_urls = list.items.map{|item| item.url}
 
     added_urls = new_urls.reject{|url| old_urls.include? url}
