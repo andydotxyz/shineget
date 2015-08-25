@@ -37,7 +37,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'nokogiri'
-gem 'rufus-scheduler'
 
 group :test do
   gem 'test-unit', '2.1.2'
