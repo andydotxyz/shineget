@@ -36,6 +36,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'open_uri_redirections'
 gem 'nokogiri'
 
 group :test do

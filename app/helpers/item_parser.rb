@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'nokogiri'
-require 'open-uri'
+require 'open_uri_redirections'
 
 class ItemParser
   def self.parse(url_or_file)
