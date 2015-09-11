@@ -5,12 +5,6 @@ class ListsControllerTest < ActionController::TestCase
     @list = lists(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:lists)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
