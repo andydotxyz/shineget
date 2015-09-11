@@ -8,7 +8,7 @@ class ItemParser
     @item = Item.new
     @item.url = url_or_file
 
-    doc = Nokogiri::HTML(open(url_or_file))
+    doc = Nokogiri::HTML(open(url_or_file, :allow_redirections => :safe))
 
     @item.title = title_of_item doc
     @item.imgurl = image_of_item doc
