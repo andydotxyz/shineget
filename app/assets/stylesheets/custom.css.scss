@@ -206,7 +206,8 @@ ul.items {
 .item-row .buygroup .oldprice {
   color: gray;
   font-size: 90%;
-  vertical-align: bottom;
+  position: relative;
+  bottom: -1.5pt;
 }
 
 .price.cheaper {

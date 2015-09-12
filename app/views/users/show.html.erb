@@ -52,36 +52,32 @@
   <div class="itemlist">
     <% if @user.lists.any? %>
       <% @user.lists.each do |list| %>
-        <% available = list.items.select{|i|!i.bought} %>
-
-        <h3 class="name">
-<!--
-          <%= list.name %> (<%= available.count %> items)
--->
-          <% if list.is_local? && current_user && current_user == @user %>
-            <form action="/lists/<%= list.id %>/items/findfromurl">
-              <span class="input-append" style="float:right; width: 100%; text-align: center">
-                <input class="span2" id="appendedInputButton" type="text" name="url" placeholder="Item url..." style="width: 80%"/>
-                <input type="submit" class="btn btn-primary" type="button" value="Add Item" />
-              </span>
-            </form>
-          <% end %>
-        </h3>
-<!--
-        <div style="clear:both"></div>
-          <% if list.url.present? %>
-          <span class="url"> - <%= list.url %></span>
+        <% if list.is_local? && current_user && current_user == @user %>
+          <form action="/lists/<%= list.id %>/items/findfromurl">
+            <span class="input-append" style="float:right; width: 100%; text-align: center">
+              <input class="span2" id="appendedInputButton" type="text" name="url" placeholder="Item url..." style="width: 80%"/>
+              <input type="submit" class="btn btn-primary" type="button" value="Add Item" />
+            </span>
+          </form>
         <% end %>
--->
-        <% if available.any? %>
-          <ul class="items">
-            <%= render available %>
-          </ul>
-          <div class="after-items"></div>
-        <% end %>
-
       <% end %>
     <% end %>
+  </div>
+
+  <div class="itemlist">
+    <ul class="items">
+      <% if @user.lists.any? %>
+        <% @user.lists.each do |list| %>
+          <% available = list.items.select{|i|!i.bought} %>
+
+          <% if available.any? %>
+            <%= render available %>
+          <% end %>
+
+        <% end %>
+      <% end %>
+    </ul>
+    <div class="after-items"></div>
   </div>
 
 <div style="clear:both;"></div>
