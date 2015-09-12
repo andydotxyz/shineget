@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'nokogiri'
-require 'open-uri'
+require 'open_uri_redirections'
 
 class ListParser
   def self.parse(url_or_file, source, limit=0)
@@ -9,7 +9,7 @@ class ListParser
     @list.url = url_or_file
     @list.source = source
 
-    doc = Nokogiri::HTML(open(url_or_file))
+    doc = Nokogiri::HTML(open(url_or_file, :allow_redirections => :safe))
 
     @list.name = title_of_item doc
     urls = list_of_items(doc, source)
@@ -38,7 +38,7 @@ class ListParser
   def self.update_list(list)
     return if list.is_local?
 
-    doc = Nokogiri::HTML(open(list.url))
+    doc = Nokogiri::HTML(open(list.url, :allow_redirections => :safe))
 
     new_urls = list_of_items(doc, list.source)
     old_urls = list.items.map{|item| item.url}
