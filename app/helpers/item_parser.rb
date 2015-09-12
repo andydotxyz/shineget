@@ -31,6 +31,7 @@ class ItemParser
   private
     def self.title_of_item(doc)
       return doc.css('#productTitle').text.strip if doc.css('#productTitle').present?
+      return doc.css('span[itemprop="name"]').text.strip if doc.css('span[itemprop="name"]').present?
 
       h1s = doc.xpath('//h1')
       return h1s[0].text.strip if h1s.count > 0 and h1s[0].text.strip.length > 0
