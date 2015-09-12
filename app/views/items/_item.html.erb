@@ -17,7 +17,7 @@
     <span class="price <%= css_class_for_current_price(item) %>">£<%= '%.2f' % current_price(item) %></span>
     <% end %>
     <% if show_old_price?(item) %>
-      <span class="price oldprice">(was £<%= '%.2f' % item.price %>)</span>
+      <span class="price oldprice"><%= price_delta(item) %> from £<%= '%.2f' % item.price %></span>
     <% end %>
   </span>
 

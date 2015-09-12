@@ -20,11 +20,29 @@ module ItemsHelper
       return ''
     end
 
-    if item.currentprice > item.price
+    if item.currentprice > item.price * 1.1
       'dearer'
-    else
+    elsif item.currentprice < item.price * 0.9
       'cheaper'
     end
+  end
+
+  def price_delta(item)
+    if !show_old_price?(item) || item.price == item.currentprice
+      return ''
+    end
+
+    if item.currentprice < item.price
+      drop = (((item.price - item.currentprice) / item.price) * 100)
+      symbol = "\u2193".force_encoding('UTF-8')
+    else
+      drop = (((item.currentprice - item.price) / item.price) * 100)
+      symbol = "\u2191".force_encoding('UTF-8')
+    end
+
+    return "%s%.2f%%" % [symbol, drop] if drop < 1
+    return "%s%.1f%%" % [symbol, drop] if drop < 5
+    "%s%.0f%%" % [symbol, drop]
   end
 
   def show_old_price?(item)
