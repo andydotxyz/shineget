@@ -2,7 +2,7 @@ ruby '2.4.7'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11'
 gem 'rails-i18n'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '3.0.5'
